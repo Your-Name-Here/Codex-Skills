@@ -15,16 +15,28 @@ const validators = [
 	["Feature specification", "validate-plan.mjs", specPath],
 	["Task list", "validate-task-list.mjs", taskListPath],
 ];
-let failed = false;
+let validationFailed = false;
+let invocationFailed = false;
 
 for (const [label, script, argument] of validators) {
 	console.log(`\n=== ${label} ===\n`);
 	const result = spawnSync(process.execPath, [path.join(scriptsDir, script), argument], { stdio: "inherit" });
-	if (result.status !== 0) failed = true;
+	if (result.error || result.signal || result.status === null) {
+		console.error(`${label} validator terminated abnormally${result.error ? `: ${result.error.message}` : result.signal ? ` (signal ${result.signal})` : ""}.`);
+		invocationFailed = true;
+	} else if (result.status === 2) {
+		invocationFailed = true;
+	} else if (result.status !== 0) {
+		validationFailed = true;
+	}
 }
 
 console.log("");
-if (failed) {
+if (invocationFailed) {
+	console.error("✗ Planning package validation could not be completed.");
+	process.exit(2);
+}
+if (validationFailed) {
 	console.error("✗ Planning package validation failed.");
 	process.exit(1);
 }

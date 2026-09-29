@@ -113,6 +113,13 @@ function nodeText(node) {
 	return "";
 }
 export function sectionHasContent(section) { return sectionText(section).length > 0; }
+// Detect bracketed template prompts while ignoring ordinary Markdown link labels.
+// This is intentionally scoped to the bracket placeholders used by this skill.
+export function hasTemplatePlaceholder(value) {
+	const withoutLinks = String(value).replace(/!?(\[[^\]\n]*\])(?:\([^\n)]*\)|\[[^\]\n]*\])/g, "");
+	return /\[[^\]\n]{3,}\]/.test(withoutLinks);
+}
+export function sectionHasTemplatePlaceholder(section) { return hasTemplatePlaceholder(sectionText(section)); }
 export function sectionHasTable(section) { return section.nodes.some((node) => node.type === "table"); }
 export function sectionHasList(section) { return section.nodes.some((node) => node.type === "list"); }
 export function countChecklistItems(nodes) {

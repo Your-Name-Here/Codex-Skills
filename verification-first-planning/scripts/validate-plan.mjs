@@ -7,10 +7,12 @@ import {
 	findSection,
 	getSections,
 	hasErrors,
+	hasTemplatePlaceholder,
 	parseMarkdownFile,
 	printIssues,
 	sectionHasContent,
 	sectionHasTable,
+	sectionText,
 	warning,
 } from "./markdown-utils.mjs";
 
@@ -45,6 +47,10 @@ const REQUIRED_SECTIONS = [
 	{
 		label: "Verification Matrix",
 		aliases: ["Verification Matrix", "Verification"],
+	},
+	{
+		label: "Acceptance Criteria",
+		aliases: ["Acceptance Criteria", "Acceptance Criterion"],
 	},
 	{
 		label: "Baseline Results",
@@ -94,6 +100,8 @@ async function main() {
 
 		if (!sectionHasContent(section)) {
 			issues.push(error(`Section is empty: ${requirement.label}`));
+		} else if (hasTemplatePlaceholder(sectionText(section))) {
+			issues.push(error(`Section contains an unfilled template placeholder: ${requirement.label}`));
 		}
 	}
 
@@ -103,6 +111,8 @@ async function main() {
 	validateVerificationMatrix(sections, issues);
 	validateBaseline(sections, issues);
 	validateHumanVerification(sections, issues);
+	validateAcceptanceCriteria(sections, issues);
+	validateVerificationPlaceholders(sections, issues);
 
 	console.log("Plan structure");
 	console.log(`  Headings: ${sections.length}`);
@@ -124,6 +134,23 @@ async function main() {
 	}
 
 	console.log("✓ Plan validation passed.");
+}
+
+function validateAcceptanceCriteria(sections, issues) {
+	const section = findSection(sections, ["Acceptance Criteria", "Acceptance Criterion"]);
+	if (!section) return;
+	const criteria = section.nodes.flatMap((node) => node.type === "list"
+		? node.items.filter((item) => typeof item.checked === "boolean" && item.text.trim().length > 0)
+		: []);
+	if (criteria.length === 0) issues.push(error("Acceptance Criteria contains no meaningful checklist criterion."));
+	else if (criteria.some((item) => hasTemplatePlaceholder(item.text))) issues.push(error("Acceptance Criteria contains an unfilled template placeholder."));
+}
+
+function validateVerificationPlaceholders(sections, issues) {
+	for (const [label, aliases] of [["Verification Matrix", ["Verification Matrix", "Verification"]], ["Baseline Results", ["Baseline Results", "Verification Baseline", "Baseline Verification Results"]]]) {
+		const section = findSection(sections, aliases);
+		if (section && hasTemplatePlaceholder(sectionText(section))) issues.push(error(`${label} contains an unfilled template placeholder.`));
+	}
 }
 
 function validateSuccessModes(sections, issues) {

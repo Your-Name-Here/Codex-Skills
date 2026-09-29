@@ -7,10 +7,12 @@ import {
 	getChildSections,
 	getSections,
 	hasErrors,
+	hasTemplatePlaceholder,
 	normalizeHeading,
 	parseMarkdownFile,
 	printIssues,
 	sectionHasContent,
+	sectionText,
 	warning,
 } from "./markdown-utils.mjs";
 
@@ -162,6 +164,8 @@ function validateTaskOrder(tasks, issues) {
 function validateTask(task, allSections, issues) {
 	if (!task.title) {
 		issues.push(error(`${task.id} has no descriptive title.`));
+	} else if (hasTemplatePlaceholder(task.title)) {
+		issues.push(error(`${task.id} title contains an unfilled template placeholder.`));
 	}
 
 	const children = getChildSections(allSections, task.section);
@@ -179,6 +183,8 @@ function validateTask(task, allSections, issues) {
 			issues.push(
 				error(`${task.id} has an empty ${requirement.label} section.`),
 			);
+		} else if (hasTemplatePlaceholder(sectionText(child))) {
+			issues.push(error(`${task.id} ${requirement.label} contains an unfilled template placeholder.`));
 		}
 	}
 
