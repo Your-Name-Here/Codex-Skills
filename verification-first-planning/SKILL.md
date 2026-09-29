@@ -48,6 +48,11 @@ Exit code `0` means no validation errors; warnings may still need human review. 
 - Keep requirements, assumptions, verification evidence, and implementation suggestions distinct. When the user explicitly delegates a behavior as an implementation choice and it does not materially affect the observable contract, record it as such and leave it open. Do not add a recommended default unless an explicit requirement, security/safety constraint, compatibility need, verified repository convention, or other documented contract constraint requires one.
 - Adapt the templates to the request. A small feature can have a compact handoff, but retain the verifier and baseline evidence when practical.
 
+## Implimentation Guidance
+
+The implementation handoff must direct the implementation agent to read
+`references/Implementation-Guidance.md` before beginning implementation.
+
 ## References
 
 - [Requirements](references/requirements.md) for defining the observable contract and material questions.
