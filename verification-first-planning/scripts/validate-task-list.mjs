@@ -1,35 +1,29 @@
 #!/usr/bin/env node
 
 import path from "node:path";
-import type { Root } from "mdast";
 import {
 	countChecklistItems,
 	error,
 	getChildSections,
 	getSections,
 	hasErrors,
-	type MarkdownSection,
 	normalizeHeading,
 	parseMarkdownFile,
 	printIssues,
 	sectionHasContent,
-	type ValidationIssue,
 	warning,
-} from "./markdown-utils.js";
+} from "./markdown-utils.mjs";
 
 const filePath = process.argv[2];
 
 if (!filePath) {
-	console.error("Usage: npx tsx scripts/validate-task-list.ts <task-list.md>");
+	console.error("Usage: node scripts/validate-task-list.mjs <task-list.md>");
 	process.exit(2);
 }
 
 const TASK_PATTERN = /^TASK-(\d+)\b(?:\s*[-\u2013\u2014:]\s*)?(.*)$/i;
 
-const REQUIRED_TASK_SECTIONS: Array<{
-	label: string;
-	aliases: string[];
-}> = [
+const REQUIRED_TASK_SECTIONS = [
 	{
 		label: "Objective",
 		aliases: ["Objective"],
@@ -48,17 +42,10 @@ const REQUIRED_TASK_SECTIONS: Array<{
 	},
 ];
 
-interface ParsedTask {
-	section: MarkdownSection;
-	id: string;
-	number: number;
-	title: string;
-}
-
-async function main(): Promise<void> {
+async function main() {
 	const absolutePath = path.resolve(filePath);
 
-	let tree: Root;
+	let tree;
 
 	try {
 		tree = await parseMarkdownFile(absolutePath);
@@ -73,7 +60,7 @@ async function main(): Promise<void> {
 	}
 
 	const sections = getSections(tree);
-	const issues: ValidationIssue[] = [];
+	const issues = [];
 
 	const tasks = parseTasks(sections);
 
@@ -117,8 +104,8 @@ async function main(): Promise<void> {
 	console.log("✓ Task-list validation passed.");
 }
 
-function parseTasks(sections: MarkdownSection[]): ParsedTask[] {
-	const tasks: ParsedTask[] = [];
+function parseTasks(sections) {
+	const tasks = [];
 
 	for (const section of sections) {
 		const match = section.title.match(TASK_PATTERN);
@@ -140,8 +127,8 @@ function parseTasks(sections: MarkdownSection[]): ParsedTask[] {
 	return tasks;
 }
 
-function validateTaskIds(tasks: ParsedTask[], issues: ValidationIssue[]): void {
-	const seen = new Map<number, ParsedTask>();
+function validateTaskIds(tasks, issues) {
+	const seen = new Map();
 
 	for (const task of tasks) {
 		const existing = seen.get(task.number);
@@ -158,10 +145,7 @@ function validateTaskIds(tasks: ParsedTask[], issues: ValidationIssue[]): void {
 	}
 }
 
-function validateTaskOrder(
-	tasks: ParsedTask[],
-	issues: ValidationIssue[],
-): void {
+function validateTaskOrder(tasks, issues) {
 	tasks.forEach((task, index) => {
 		const expected = index + 1;
 
@@ -175,11 +159,7 @@ function validateTaskOrder(
 	});
 }
 
-function validateTask(
-	task: ParsedTask,
-	allSections: MarkdownSection[],
-	issues: ValidationIssue[],
-): void {
+function validateTask(task, allSections, issues) {
 	if (!task.title) {
 		issues.push(error(`${task.id} has no descriptive title.`));
 	}
@@ -207,11 +187,7 @@ function validateTask(
 	validateTests(task, children, issues);
 }
 
-function validateDefinitionOfDone(
-	task: ParsedTask,
-	children: MarkdownSection[],
-	issues: ValidationIssue[],
-): void {
+function validateDefinitionOfDone(task, children, issues) {
 	const section = findChildSection(children, [
 		"Definition of Done",
 		"Done",
@@ -231,11 +207,7 @@ function validateDefinitionOfDone(
 	}
 }
 
-function validateTests(
-	task: ParsedTask,
-	children: MarkdownSection[],
-	issues: ValidationIssue[],
-): void {
+function validateTests(task, children, issues) {
 	const section = findChildSection(children, [
 		"Tests",
 		"Tests Covering This Task",
@@ -257,10 +229,7 @@ function validateTests(
 	}
 }
 
-function findChildSection(
-	sections: MarkdownSection[],
-	aliases: string[],
-): MarkdownSection | undefined {
+function findChildSection(sections, aliases) {
 	const normalizedAliases = aliases.map(normalizeHeading);
 
 	return sections.find((section) =>
@@ -268,7 +237,7 @@ function findChildSection(
 	);
 }
 
-function printSummary(tasks: ParsedTask[], sections: MarkdownSection[]): void {
+function printSummary(tasks, sections) {
 	let checklistTotal = 0;
 	let checklistChecked = 0;
 

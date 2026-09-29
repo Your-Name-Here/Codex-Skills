@@ -1,8 +1,6 @@
 #!/usr/bin/env node
 
 import path from "node:path";
-import type { Root } from "mdast";
-import { toString as mdastToString } from "mdast-util-to-string";
 import {
 	countListItems,
 	error,
@@ -13,21 +11,17 @@ import {
 	printIssues,
 	sectionHasContent,
 	sectionHasTable,
-	type ValidationIssue,
 	warning,
-} from "./markdown-utils.js";
+} from "./markdown-utils.mjs";
 
 const filePath = process.argv[2];
 
 if (!filePath) {
-	console.error("Usage: npx tsx scripts/validate-plan.ts <plan.md>");
+	console.error("Usage: node scripts/validate-plan.mjs <plan.md>");
 	process.exit(2);
 }
 
-const REQUIRED_SECTIONS: Array<{
-	label: string;
-	aliases: string[];
-}> = [
+const REQUIRED_SECTIONS = [
 	{
 		label: "Goal",
 		aliases: ["Goal"],
@@ -62,10 +56,10 @@ const REQUIRED_SECTIONS: Array<{
 	},
 ];
 
-async function main(): Promise<void> {
+async function main() {
 	const absolutePath = path.resolve(filePath);
 
-	let tree: Root;
+	let tree;
 
 	try {
 		tree = await parseMarkdownFile(absolutePath);
@@ -80,7 +74,7 @@ async function main(): Promise<void> {
 	}
 
 	const sections = getSections(tree);
-	const issues: ValidationIssue[] = [];
+	const issues = [];
 
 	console.log(`Validating plan: ${absolutePath}`);
 	console.log("");
@@ -132,10 +126,7 @@ async function main(): Promise<void> {
 	console.log("✓ Plan validation passed.");
 }
 
-function validateSuccessModes(
-	sections: ReturnType<typeof getSections>,
-	issues: ValidationIssue[],
-): void {
+function validateSuccessModes(sections, issues) {
 	const section = findSection(sections, [
 		"Success Modes",
 		"Success Cases",
@@ -159,10 +150,7 @@ function validateSuccessModes(
 	}
 }
 
-function validateFailureModes(
-	sections: ReturnType<typeof getSections>,
-	issues: ValidationIssue[],
-): void {
+function validateFailureModes(sections, issues) {
 	const section = findSection(sections, [
 		"Failure Modes",
 		"Failure Cases",
@@ -186,10 +174,7 @@ function validateFailureModes(
 	}
 }
 
-function validateInvariants(
-	sections: ReturnType<typeof getSections>,
-	issues: ValidationIssue[],
-): void {
+function validateInvariants(sections, issues) {
 	const section = findSection(sections, ["Invariants", "System Invariants"]);
 
 	if (!section) {
@@ -201,10 +186,7 @@ function validateInvariants(
 	}
 }
 
-function validateVerificationMatrix(
-	sections: ReturnType<typeof getSections>,
-	issues: ValidationIssue[],
-): void {
+function validateVerificationMatrix(sections, issues) {
 	const section = findSection(sections, [
 		"Verification Matrix",
 		"Verification",
@@ -237,10 +219,7 @@ function validateVerificationMatrix(
 	}
 }
 
-function validateBaseline(
-	sections: ReturnType<typeof getSections>,
-	issues: ValidationIssue[],
-): void {
+function validateBaseline(sections, issues) {
 	const section = findSection(sections, [
 		"Baseline Results",
 		"Verification Baseline",
@@ -251,7 +230,7 @@ function validateBaseline(
 		return;
 	}
 
-	const text = section.nodes.map((node) => mdastToString(node)).join("\n");
+	const text = section.nodes.map((node) => node.text ?? node.rows?.join(" ") ?? node.items?.map((item) => item.text).join(" ") ?? "").join("\n");
 
 	const fullText = section.nodes.map((node) => JSON.stringify(node)).join("\n");
 
@@ -268,10 +247,7 @@ function validateBaseline(
 	}
 }
 
-function validateHumanVerification(
-	sections: ReturnType<typeof getSections>,
-	issues: ValidationIssue[],
-): void {
+function validateHumanVerification(sections, issues) {
 	const section = findSection(sections, [
 		"Human Verification",
 		"Human-Verification Requirements",

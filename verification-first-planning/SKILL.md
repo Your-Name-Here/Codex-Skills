@@ -23,20 +23,20 @@ This skill prepares a later implementation agent to work toward a concrete verif
 
 ## Planning artifact validation
 
-The repository includes TypeScript scripts that inspect plan and task-list Markdown. From the skill directory, install dependencies with `npm install` once, then run:
+The skill includes dependency-free Node.js scripts that inspect plan and task-list Markdown. Node.js is the only runtime requirement. Run:
 
 ```sh
-npm run validate:plan -- docs/plans/<feature-slug>/plan.md
-npm run validate:tasks -- docs/plans/<feature-slug>/task-list.md
+node scripts/validate-plan.mjs docs/plans/<feature-slug>/plan.md
+node scripts/validate-task-list.mjs docs/plans/<feature-slug>/task-list.md
 ```
 
 To run both checks together:
 
 ```sh
-npm run validate:package -- docs/plans/<feature-slug>/plan.md docs/plans/<feature-slug>/task-list.md
+node scripts/combined-validate.mjs docs/plans/<feature-slug>/plan.md docs/plans/<feature-slug>/task-list.md
 ```
 
-Exit code `0` means no validation errors; warnings may still need human review. Exit code `1` means one or more structural errors were found. Exit code `2` means the command arguments or input file are unavailable. Check script health with `npm run lint` and `npm run typecheck`. If your project does not use this skill repository's tooling, adapt the command paths to the installed copy of the skill or validate the artifact manually.
+Exit code `0` means no validation errors; warnings may still need human review. Exit code `1` means one or more structural errors were found. Exit code `2` means the command arguments or input file are unavailable. The validators recognize the Markdown structures used by these planning templates: headings, paragraphs, lists, task checkboxes, and GFM-style tables. If your project does not use this skill repository's tooling, adapt the command paths to the installed copy of the skill or validate the artifact manually.
 
 ## Boundaries
 
