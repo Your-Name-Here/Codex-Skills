@@ -20,3 +20,7 @@ State criteria so a verifier can distinguish pass from fail through observable o
 Resolve ambiguity before calling the handoff implementation-ready if plausible interpretations would change observable behavior, persistence, security, compatibility, destructive effects, or the verification strategy. Ask the user about such a blocking question. Do not block on internal design choices the implementation agent can safely make while preserving the contract. Record other uncertainty as an explicit assumption and note its impact when useful.
 
 Do not infer requirements from a code pattern alone or turn every sentence in a request into a separate criterion. Preserve stated priorities and avoid adding unrequested behavior.
+
+## Delegated implementation choices
+
+When the user explicitly leaves a behavior to implementation and the choice does not materially change the observable contract, record it as an implementation choice and leave it open. Do not add a preferred or recommended default just because one seems conventional. Recommend or constrain a choice only to satisfy an explicit requirement, security or safety constraint, compatibility, a verified repository convention, or another documented contract constraint; record that reason.
