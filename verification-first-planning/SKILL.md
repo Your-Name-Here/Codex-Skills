@@ -18,7 +18,25 @@ This skill prepares a later implementation agent to work toward a concrete verif
 5. Create executable tests, fixtures, test data, or test-only harness changes before implementation where practical. Keep these artifacts focused on observing or exercising product behavior. Do not add the feature's behavior to a test harness to make the verifier pass. When executable verification is impractical, document why and specify human verification.
 6. Run the new verifier and the relevant existing checks to establish a baseline when they can be run safely. Record existing passes, pre-existing failures, new tests failing for the expected missing behavior, checks that cannot run yet, and required human verification. Diagnose and fix test or setup defects rather than labeling arbitrary failures as expected. Never claim a check ran or passed without evidence.
 7. Create the granular implementation task plan after the baseline. Order tasks by dependencies and outcomes, link them to criteria and verifiers, and include post-implementation verification. The task list is a handoff for future work; stop before implementing product behavior unless explicitly instructed otherwise.
-8. Save durable artifacts in the project's established planning location. If none exists, use `docs/plans/<feature-slug>/`. Summarize created artifacts, baseline results, unknowns, and blocking issues in chat. If no repository is available, provide the handoff in the requested format and explicitly mark unknown project facts.
+8. Run the planning-document validators. Validate the feature specification/plan and task list separately or run the combined command; resolve errors and review warnings before handing off. These scripts check Markdown structure and completeness, not whether requirements are correct or checks actually ran.
+9. Save durable artifacts in the project's established planning location. If none exists, use `docs/plans/<feature-slug>/`. Summarize created artifacts, baseline results, validator results, unknowns, and blocking issues in chat. If no repository is available, provide the handoff in the requested format and explicitly mark unknown project facts.
+
+## Planning artifact validation
+
+The repository includes TypeScript scripts that inspect plan and task-list Markdown. From the skill directory, install dependencies with `npm install` once, then run:
+
+```sh
+npm run validate:plan -- docs/plans/<feature-slug>/plan.md
+npm run validate:tasks -- docs/plans/<feature-slug>/task-list.md
+```
+
+To run both checks together:
+
+```sh
+npm run validate:package -- docs/plans/<feature-slug>/plan.md docs/plans/<feature-slug>/task-list.md
+```
+
+Exit code `0` means no validation errors; warnings may still need human review. Exit code `1` means one or more structural errors were found. Exit code `2` means the command arguments or input file are unavailable. Check script health with `npm run lint` and `npm run typecheck`. If your project does not use this skill repository's tooling, adapt the command paths to the installed copy of the skill or validate the artifact manually.
 
 ## Boundaries
 
