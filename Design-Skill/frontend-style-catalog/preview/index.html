@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Frontend Style Catalog</title>
+    <link rel="stylesheet" href="./preview.css">
+  </head>
+  <body>
+    <main class="page">
+      <header class="hero">
+        <p class="eyebrow">Codex Skill Preview</p>
+        <h1>Frontend Style Catalog</h1>
+        <p class="lede">
+          Browse starter themes for web and Electron projects. Each card maps to a
+          folder with rules, tokens, anti-patterns, and audit guidance.
+        </p>
+      </header>
+
+      <section class="catalog-section">
+        <div class="section-head">
+          <h2>Starter Themes</h2>
+          <p id="status">Loading theme metadata...</p>
+        </div>
+        <div id="theme-grid" class="theme-grid"></div>
+      </section>
+    </main>
+
+    <template id="theme-card-template">
+      <article class="theme-card">
+        <div class="card-top">
+          <h3 class="theme-name"></h3>
+          <p class="theme-description"></p>
+        </div>
+        <dl class="theme-meta">
+          <div>
+            <dt>Best used for</dt>
+            <dd class="theme-best-for"></dd>
+          </div>
+          <div>
+            <dt>Tags</dt>
+            <dd class="theme-tags"></dd>
+          </div>
+          <div>
+            <dt>Folder</dt>
+            <dd class="theme-folder"></dd>
+          </div>
+        </dl>
+        <div class="theme-actions"></div>
+      </article>
+    </template>
+
+    <script src="./preview.js"></script>
+  </body>
+</html>

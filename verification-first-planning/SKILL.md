@@ -1,0 +1,38 @@
+---
+name: verification-first-planning
+description: Create verification-first implementation handoffs for software projects and features by defining observable behavior, preparing and baselining checks before implementation where practical, and producing a traceable task plan. Use for feature or project planning, not implementation-only requests.
+metadata:
+  short-description: Create a verified implementation handoff
+---
+
+# Verification-First Implementation Handoff
+
+This skill prepares a later implementation agent to work toward a concrete verifier. Planning includes creating verification artifacts and recording their current results; it does not include implementing product behavior.
+
+## Workflow
+
+1. Understand the request and inspect the repository, conventions, behavior, and verification setup before designing checks or implementation tasks. If no repository is available, plan from the prompt and mark repository-specific facts as unknown; never invent project structure.
+2. Define the observable end state, success modes, failure modes, invariants, and existing behavior that must be preserved. Record implementation-shaping details only when they materially affect behavior or verification.
+3. Resolve ambiguities that materially change observable behavior, persistence, security, compatibility, destructive effects, or verification. Ask about blocking questions before calling the handoff implementation-ready. Record non-blocking uncertainty as explicit assumptions; leave safe implementation choices to the implementation agent.
+4. Design a verification strategy and map each acceptance criterion, important failure mode, invariant, and preserved behavior to concrete evidence. Select test types for distinct coverage rather than following a fixed test pyramid.
+5. Create executable tests, fixtures, test data, or test-only harness changes before implementation where practical. Keep these artifacts focused on observing or exercising product behavior. Do not add the feature's behavior to a test harness to make the verifier pass. When executable verification is impractical, document why and specify human verification.
+6. Run the new verifier and the relevant existing checks to establish a baseline when they can be run safely. Record existing passes, pre-existing failures, new tests failing for the expected missing behavior, checks that cannot run yet, and required human verification. Diagnose and fix test or setup defects rather than labeling arbitrary failures as expected. Never claim a check ran or passed without evidence.
+7. Create the granular implementation task plan after the baseline. Order tasks by dependencies and outcomes, link them to criteria and verifiers, and include post-implementation verification. The task list is a handoff for future work; stop before implementing product behavior unless explicitly instructed otherwise.
+8. Save durable artifacts in the project's established planning location. If none exists, use `docs/plans/<feature-slug>/`. Summarize created artifacts, baseline results, unknowns, and blocking issues in chat. If no repository is available, provide the handoff in the requested format and explicitly mark unknown project facts.
+
+## Boundaries
+
+- Planning may create or update feature specifications, verification matrices, tests, fixtures, test data, test harnesses, test-only configuration, baseline reports, and task lists. It must not implement product behavior.
+- Before running checks, inspect their target and side effects. Do not run checks against production or shared state; if execution could be destructive or externally mutating, obtain authorization or record that verification cannot yet run.
+- Keep requirements, assumptions, verification evidence, and implementation suggestions distinct.
+- Adapt the templates to the request. A small feature can have a compact handoff, but retain the verifier and baseline evidence when practical.
+
+## References
+
+- [Requirements](references/requirements.md) for defining the observable contract and material questions.
+- [Verification strategy](references/verification-strategy.md) for mapping behavior to evidence and selecting check types.
+- [Verification artifacts](references/verification-artifacts.md) for writing tests and test-only support before implementation.
+- [Baseline results](references/baseline-results.md) for running checks safely and reporting outcomes.
+- [Task planning](references/task-planning.md) for the implementation handoff after baseline.
+- Read the relevant method guide when selecting [unit](references/unit-tests.md), [integration](references/integration-tests.md), [end-to-end](references/e2e-tests.md), [regression](references/regression-tests.md), [smoke](references/smoke-tests.md), or [property and invariant](references/property-and-invariant-tests.md) checks.
+- Use the [feature specification](templates/feature-spec.md), [verification matrix](templates/verification-matrix.md), [baseline report](templates/baseline-report.md), and [task list](templates/task-list.md) templates as appropriate.

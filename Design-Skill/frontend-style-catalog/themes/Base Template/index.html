@@ -1,0 +1,641 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Theme Specimen</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="./tokens.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <span class="icon-tile">FS</span>
+        <div>
+          <strong>Theme Specimen</strong>
+          <div class="muted small">Base Template</div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav" aria-label="Primary">
+        <a class="nav-link active" href="#foundations">Foundations</a>
+        <a class="nav-link" href="#actions">Actions</a>
+        <a class="nav-link" href="#inputs">Inputs</a>
+        <a class="nav-link" href="#navigation">Navigation</a>
+        <a class="nav-link" href="#surfaces">Surfaces</a>
+        <a class="nav-link" href="#data">Data</a>
+        <a class="nav-link" href="#layouts">App Layouts</a>
+      </nav>
+    </aside>
+
+    <div class="workspace">
+      <header class="toolbar">
+        <div class="toolbar-group">
+          <button class="icon-btn" aria-label="Menu">≡</button>
+          <div>
+            <h1>Theme Specimen</h1>
+            <p class="muted">Common UI elements for testing a visual theme.</p>
+          </div>
+        </div>
+        <div class="toolbar-group">
+          <div class="search-box">
+            <span class="search-icon">⌕</span>
+            <input class="search-input" type="search" placeholder="Search components" />
+          </div>
+          <button class="btn">Preview</button>
+          <button class="btn primary">Publish</button>
+        </div>
+      </header>
+
+      <main class="page">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="#">Catalog</a>
+          <span>/</span>
+          <a href="#">Starter Themes</a>
+          <span>/</span>
+          <span aria-current="page">Base Template</span>
+        </nav>
+
+        <section class="section stack" id="foundations">
+          <div class="section-head">
+            <h2>Foundations</h2>
+            <p class="muted">Typography, swatches, spacing, and icon placeholders.</p>
+          </div>
+
+          <div class="sample-grid two-up">
+            <article class="panel stack">
+              <h3>Typography</h3>
+              <div class="stack">
+                <h1 class="type-xl">Heading XL</h1>
+                <h2 class="type-lg">Heading Large</h2>
+                <h3 class="type-md">Heading Medium</h3>
+                <p>Body text for reading, settings, and descriptions.</p>
+                <p class="muted">Muted helper or metadata text.</p>
+                <p class="mono">Mono sample: asset_042.png</p>
+              </div>
+            </article>
+
+            <article class="panel stack">
+              <h3>Color Swatches</h3>
+              <div class="swatch-grid">
+                <div class="swatch">
+                  <span class="swatch-chip bg-main"></span>
+                  <strong>Background</strong>
+                </div>
+                <div class="swatch">
+                  <span class="swatch-chip bg-panel"></span>
+                  <strong>Panel</strong>
+                </div>
+                <div class="swatch">
+                  <span class="swatch-chip bg-panel-2"></span>
+                  <strong>Panel 2</strong>
+                </div>
+                <div class="swatch">
+                  <span class="swatch-chip bg-accent"></span>
+                  <strong>Accent</strong>
+                </div>
+                <div class="swatch">
+                  <span class="swatch-chip bg-success"></span>
+                  <strong>Success</strong>
+                </div>
+                <div class="swatch">
+                  <span class="swatch-chip bg-warning"></span>
+                  <strong>Warning</strong>
+                </div>
+                <div class="swatch">
+                  <span class="swatch-chip bg-danger"></span>
+                  <strong>Danger</strong>
+                </div>
+              </div>
+            </article>
+
+            <article class="panel stack">
+              <h3>Spacing Samples</h3>
+              <div class="spacing-samples">
+                <div class="space-row"><span class="space-label">4</span><span class="space-bar space-1"></span></div>
+                <div class="space-row"><span class="space-label">8</span><span class="space-bar space-2"></span></div>
+                <div class="space-row"><span class="space-label">12</span><span class="space-bar space-3"></span></div>
+                <div class="space-row"><span class="space-label">16</span><span class="space-bar space-4"></span></div>
+                <div class="space-row"><span class="space-label">24</span><span class="space-bar space-5"></span></div>
+              </div>
+            </article>
+
+            <article class="panel stack">
+              <h3>Icons / Placeholders</h3>
+              <div class="row">
+                <span class="icon-tile">A</span>
+                <span class="icon-tile">+</span>
+                <span class="icon-tile">★</span>
+                <span class="icon-tile">?</span>
+                <div class="avatar-placeholder">IMG</div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="section stack" id="actions">
+          <div class="section-head">
+            <h2>Actions</h2>
+            <p class="muted">Buttons, icon buttons, grouped actions, and menu triggers.</p>
+          </div>
+
+          <div class="sample-grid two-up">
+            <article class="panel stack">
+              <h3>Buttons</h3>
+              <div class="row">
+                <button class="btn">Default</button>
+                <button class="btn primary">Primary</button>
+                <button class="btn danger">Danger</button>
+                <button class="btn ghost">Ghost</button>
+                <button class="btn" disabled>Disabled</button>
+              </div>
+            </article>
+
+            <article class="panel stack">
+              <h3>Icon Buttons</h3>
+              <div class="row">
+                <button class="icon-btn" aria-label="Add">+</button>
+                <button class="icon-btn" aria-label="Edit">✎</button>
+                <button class="icon-btn active" aria-label="Favorite">★</button>
+                <button class="icon-btn" aria-label="Delete">×</button>
+              </div>
+            </article>
+
+            <article class="panel stack">
+              <h3>Button Group</h3>
+              <div class="button-group" role="group" aria-label="View mode">
+                <button class="btn active">List</button>
+                <button class="btn">Grid</button>
+                <button class="btn">Split</button>
+              </div>
+            </article>
+
+            <article class="panel stack">
+              <h3>Dropdown Menu</h3>
+              <details class="dropdown">
+                <summary class="btn">Open Menu</summary>
+                <div class="menu" role="menu">
+                  <button class="menu-item" role="menuitem">Rename</button>
+                  <button class="menu-item" role="menuitem">Duplicate</button>
+                  <button class="menu-item danger-text" role="menuitem">Delete</button>
+                </div>
+              </details>
+            </article>
+          </div>
+        </section>
+
+        <section class="section stack" id="inputs">
+          <div class="section-head">
+            <h2>Inputs</h2>
+            <p class="muted">Text entry, selections, toggles, search, and slider controls.</p>
+          </div>
+
+          <div class="sample-grid two-up">
+            <article class="panel stack">
+              <h3>Field Set</h3>
+              <div class="field-grid">
+                <label class="field">
+                  <span>Text Input</span>
+                  <input class="input" value="Example Project" />
+                </label>
+
+                <label class="field">
+                  <span>Search Box</span>
+                  <div class="search-box">
+                    <span class="search-icon">⌕</span>
+                    <input class="search-input" type="search" placeholder="Find assets" />
+                  </div>
+                </label>
+
+                <label class="field wide">
+                  <span>Textarea</span>
+                  <textarea class="input" rows="4">Theme notes...</textarea>
+                </label>
+
+                <label class="field">
+                  <span>Select</span>
+                  <select class="input">
+                    <option>Draft</option>
+                    <option>Active</option>
+                    <option>Archived</option>
+                  </select>
+                </label>
+              </div>
+            </article>
+
+            <article class="panel stack">
+              <h3>Choice Controls</h3>
+              <label class="check-row">
+                <input type="checkbox" checked />
+                <span>Checkbox option</span>
+              </label>
+
+              <div class="stack">
+                <label class="check-row">
+                  <input type="radio" name="mode" checked />
+                  <span>Radio A</span>
+                </label>
+                <label class="check-row">
+                  <input type="radio" name="mode" />
+                  <span>Radio B</span>
+                </label>
+              </div>
+
+              <label class="toggle-row">
+                <span>Toggle</span>
+                <span class="toggle">
+                  <input type="checkbox" checked />
+                  <span class="toggle-track"></span>
+                </span>
+              </label>
+
+              <label class="field">
+                <span>Range Slider</span>
+                <input type="range" value="45" />
+              </label>
+            </article>
+          </div>
+        </section>
+
+        <section class="section stack" id="navigation">
+          <div class="section-head">
+            <h2>Navigation</h2>
+            <p class="muted">Tabs, breadcrumbs, pagination, and a compact sidebar sample.</p>
+          </div>
+
+          <div class="sample-grid two-up">
+            <article class="panel stack">
+              <h3>Tabs</h3>
+              <div class="tabs-demo stack">
+                <div class="tabs" role="tablist" aria-label="Example tabs">
+                  <button class="tab active" type="button" role="tab" id="tab-overview" aria-selected="true" aria-controls="panel-overview">Overview</button>
+                  <button class="tab" type="button" role="tab" id="tab-assets" aria-selected="false" aria-controls="panel-assets" tabindex="-1">Assets</button>
+                  <button class="tab" type="button" role="tab" id="tab-history" aria-selected="false" aria-controls="panel-history" tabindex="-1">History</button>
+                </div>
+                <div class="tab-panels">
+                  <section class="tab-panel active" id="panel-overview" role="tabpanel" aria-labelledby="tab-overview">
+                    <p class="muted">Overview content with summary metrics and current state.</p>
+                  </section>
+                  <section class="tab-panel" id="panel-assets" role="tabpanel" aria-labelledby="tab-assets" hidden>
+                    <p class="muted">Assets content with files, previews, and batch actions.</p>
+                  </section>
+                  <section class="tab-panel" id="panel-history" role="tabpanel" aria-labelledby="tab-history" hidden>
+                    <p class="muted">History content with revisions, events, and audit notes.</p>
+                  </section>
+                </div>
+              </div>
+            </article>
+
+            <article class="panel stack">
+              <h3>Pagination</h3>
+              <nav class="pagination" aria-label="Pagination">
+                <button class="page-link page-link-wide" type="button">Prev</button>
+                <button class="page-link active" type="button" aria-current="page">1</button>
+                <button class="page-link" type="button">2</button>
+                <button class="page-link" type="button">3</button>
+                <button class="page-link page-link-wide" type="button">Next</button>
+              </nav>
+            </article>
+
+            <article class="panel stack">
+              <h3>Sidebar Nav</h3>
+              <div class="mini-sidebar">
+                <a class="nav-link active" href="#">Dashboard</a>
+                <a class="nav-link" href="#">Library</a>
+                <a class="nav-link" href="#">Exports</a>
+                <a class="nav-link" href="#">Settings</a>
+              </div>
+            </article>
+
+            <article class="panel stack">
+              <h3>Breadcrumbs</h3>
+              <nav class="breadcrumbs" aria-label="Secondary breadcrumb">
+                <a href="#">Workspace</a>
+                <span>/</span>
+                <a href="#">Projects</a>
+                <span>/</span>
+                <span aria-current="page">Theme Audit</span>
+              </nav>
+            </article>
+          </div>
+        </section>
+
+        <section class="section stack" id="surfaces">
+          <div class="section-head">
+            <h2>Surfaces</h2>
+            <p class="muted">Cards, panels, overlays, collapsible sections, and helper surfaces.</p>
+          </div>
+
+          <div class="sample-grid two-up">
+            <article class="card stack">
+              <h3>Card</h3>
+              <p class="muted">Metadata, actions, and status.</p>
+              <div class="row">
+                <span class="badge">Ready</span>
+                <button class="btn">Open</button>
+              </div>
+            </article>
+
+            <article class="panel stack">
+              <h3>Panel</h3>
+              <p class="muted">Useful for side inspectors, settings, or stacked information blocks.</p>
+            </article>
+
+            <article class="modal-mock stack">
+              <div class="modal-head">
+                <h3>Modal / Dialog</h3>
+                <button class="icon-btn" aria-label="Close">×</button>
+              </div>
+              <p class="muted">Confirmation or focused-edit pattern.</p>
+              <div class="row">
+                <button class="btn">Cancel</button>
+                <button class="btn primary">Confirm</button>
+              </div>
+            </article>
+
+            <article class="panel stack">
+              <h3>Popover / Tooltip</h3>
+              <div class="popover-demo">
+                <div class="row">
+                  <div class="popover-wrap">
+                    <button class="btn popover-trigger" type="button" aria-expanded="false" aria-controls="demo-popover">Filter Options</button>
+                    <div class="popover" id="demo-popover" hidden>
+                      <strong>Quick Filters</strong>
+                      <p class="muted">Use this for anchored actions, quick settings, or small contextual forms.</p>
+                      <label class="check-row">
+                        <input type="checkbox" checked />
+                        <span>Only show active items</span>
+                      </label>
+                    </div>
+                  </div>
+                  <span class="tooltip-wrap">
+                    <button class="tooltip-target icon-btn" type="button" aria-describedby="demo-tooltip">?</button>
+                    <span class="tooltip-bubble" id="demo-tooltip" role="tooltip">Short helper text on hover or focus.</span>
+                  </span>
+                </div>
+              </div>
+            </article>
+
+            <article class="panel stack">
+              <h3>Accordion</h3>
+              <div class="accordion-list">
+                <details class="accordion" open>
+                  <summary>Display Settings</summary>
+                  <p class="muted">Expand this area for secondary settings or reference info.</p>
+                </details>
+                <details class="accordion">
+                  <summary>Keyboard Shortcuts</summary>
+                  <p class="muted">Use additional entries to show grouped settings, help, or context.</p>
+                </details>
+                <details class="accordion">
+                  <summary>Advanced Options</summary>
+                  <p class="muted">Closed entries should stay compact and only reveal content when opened.</p>
+                </details>
+              </div>
+            </article>
+
+            <article class="panel stack">
+              <h3>Details / Summary</h3>
+              <details>
+                <summary>View more context</summary>
+                <p class="muted">Native disclosure pattern for docs or secondary metadata.</p>
+              </details>
+            </article>
+          </div>
+        </section>
+
+        <section class="section stack" id="data">
+          <div class="section-head">
+            <h2>Data</h2>
+            <p class="muted">Tables, lists, trees, status markers, and loading/empty patterns.</p>
+          </div>
+
+          <div class="sample-grid">
+            <article class="panel stack">
+              <h3>Table</h3>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Status</th>
+                    <th>Updated</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Sprite Sheet</td>
+                    <td><span class="badge success">Ready</span></td>
+                    <td>Today</td>
+                  </tr>
+                  <tr>
+                    <td>Controller Test</td>
+                    <td><span class="badge warning">Review</span></td>
+                    <td>Yesterday</td>
+                  </tr>
+                </tbody>
+              </table>
+            </article>
+
+            <article class="panel stack">
+              <h3>Dense Table</h3>
+              <table class="table dense">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>State</th>
+                    <th>ETA</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="mono">A-14</td>
+                    <td>Queued</td>
+                    <td>03m</td>
+                  </tr>
+                  <tr>
+                    <td class="mono">B-02</td>
+                    <td>Running</td>
+                    <td>11m</td>
+                  </tr>
+                </tbody>
+              </table>
+            </article>
+
+            <article class="panel stack">
+              <h3>List</h3>
+              <ul class="data-list">
+                <li><span>Inbox Zero Pass</span><span class="badge">4</span></li>
+                <li><span>Label Assets</span><span class="badge warning">2</span></li>
+                <li><span>Ship Preview</span><span class="badge success">Done</span></li>
+              </ul>
+            </article>
+
+            <article class="panel stack">
+              <h3>Tree View</h3>
+              <ul class="tree">
+                <li>
+                  <span>src</span>
+                  <ul>
+                    <li><span>components</span></li>
+                    <li><span>styles</span></li>
+                  </ul>
+                </li>
+                <li><span>assets</span></li>
+                <li><span>tests</span></li>
+              </ul>
+            </article>
+
+            <article class="panel stack">
+              <h3>Badges / Progress</h3>
+              <div class="row">
+                <span class="badge">Neutral</span>
+                <span class="badge success">Success</span>
+                <span class="badge warning">Warning</span>
+                <span class="badge danger">Danger</span>
+              </div>
+              <div class="progress" aria-label="Progress">
+                <span class="progress-bar" style="width: 62%;"></span>
+              </div>
+            </article>
+
+            <article class="empty-state stack">
+              <div class="avatar-placeholder large">0</div>
+              <h3>Empty State</h3>
+              <p class="muted">No records yet. Create one to preview this state.</p>
+              <button class="btn primary">Create Item</button>
+            </article>
+          </div>
+        </section>
+
+        <section class="section stack" id="layouts">
+          <div class="section-head">
+            <h2>App Layouts</h2>
+            <p class="muted">Shell, split panes, inspector, status bars, and command palette mockups.</p>
+          </div>
+
+          <div class="layout-stack">
+            <article class="layout-demo stack">
+              <h3>App Shell / Toolbar / Status Bar</h3>
+              <div class="shell-demo">
+                <header class="mini-toolbar">
+                  <span class="badge">Project</span>
+                  <span class="muted">Toolbar actions</span>
+                </header>
+                <div class="mini-content">Main workspace content</div>
+                <footer class="status-bar">
+                  <span>Connected</span>
+                  <span>3 tasks</span>
+                  <span>Ready</span>
+                </footer>
+              </div>
+            </article>
+
+            <article class="layout-demo stack">
+              <h3>Split Pane / Inspector Panel</h3>
+              <div class="split-pane">
+                <div class="split-main">Canvas or document pane</div>
+                <aside class="inspector-panel">
+                  <strong>Inspector</strong>
+                  <p class="muted">Property fields, metadata, and actions.</p>
+                </aside>
+              </div>
+            </article>
+
+            <article class="layout-demo stack">
+              <h3>Command Palette Mockup</h3>
+              <div class="command-palette">
+                <div class="command-input">Type a command or search...</div>
+                <ul class="command-results">
+                  <li><span>Open Theme Preview</span><kbd>Enter</kbd></li>
+                  <li><span>Run Style Audit</span><kbd>Ctrl+K</kbd></li>
+                  <li><span>Switch Layout Mode</span><kbd>Tab</kbd></li>
+                </ul>
+              </div>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+  <script>
+    const tabLists = document.querySelectorAll('[role="tablist"]');
+
+    tabLists.forEach((tabList) => {
+      const tabs = Array.from(tabList.querySelectorAll('[role="tab"]'));
+
+      function activateTab(nextTab) {
+        tabs.forEach((tab) => {
+          const selected = tab === nextTab;
+          const panel = document.getElementById(tab.getAttribute('aria-controls'));
+
+          tab.classList.toggle('active', selected);
+          tab.setAttribute('aria-selected', String(selected));
+          tab.tabIndex = selected ? 0 : -1;
+
+          if (panel) {
+            panel.classList.toggle('active', selected);
+            panel.hidden = !selected;
+          }
+        });
+      }
+
+      tabList.addEventListener('click', (event) => {
+        const nextTab = event.target.closest('[role="tab"]');
+        if (!nextTab) return;
+        activateTab(nextTab);
+      });
+
+      tabList.addEventListener('keydown', (event) => {
+        const currentIndex = tabs.indexOf(document.activeElement);
+        if (currentIndex === -1) return;
+
+        let nextIndex = currentIndex;
+
+        if (event.key === 'ArrowRight') nextIndex = (currentIndex + 1) % tabs.length;
+        if (event.key === 'ArrowLeft') nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+        if (event.key === 'Home') nextIndex = 0;
+        if (event.key === 'End') nextIndex = tabs.length - 1;
+
+        if (nextIndex !== currentIndex) {
+          event.preventDefault();
+          const nextTab = tabs[nextIndex];
+          nextTab.focus();
+          activateTab(nextTab);
+        }
+      });
+    });
+
+    const popoverTriggers = document.querySelectorAll('.popover-trigger');
+
+    function closePopover(trigger) {
+      const popover = document.getElementById(trigger.getAttribute('aria-controls'));
+      trigger.setAttribute('aria-expanded', 'false');
+      if (popover) popover.hidden = true;
+    }
+
+    function openPopover(trigger) {
+      const popover = document.getElementById(trigger.getAttribute('aria-controls'));
+      trigger.setAttribute('aria-expanded', 'true');
+      if (popover) popover.hidden = false;
+    }
+
+    popoverTriggers.forEach((trigger) => {
+      trigger.addEventListener('click', () => {
+        const expanded = trigger.getAttribute('aria-expanded') === 'true';
+        popoverTriggers.forEach((item) => closePopover(item));
+        if (!expanded) openPopover(trigger);
+      });
+    });
+
+    document.addEventListener('click', (event) => {
+      if (event.target.closest('.popover-wrap')) return;
+      popoverTriggers.forEach((trigger) => closePopover(trigger));
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape') return;
+      popoverTriggers.forEach((trigger) => closePopover(trigger));
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+:root {
+  --sp-bg: #f4efe7;
+  --sp-surface: #fffaf4;
+  --sp-surface-2: #efe7db;
+  --sp-border: #d9cdbd;
+  --sp-text: #2f241d;
+  --sp-text-muted: #74675d;
+  --sp-accent: #5f8f78;
+  --sp-accent-2: #c77b57;
+  --sp-focus: #7aa7ff;
+  --sp-danger: #b85c5c;
+  --sp-radius: 14px;
+  --sp-radius-soft: 20px;
+  --sp-shadow: 0 12px 30px rgba(69, 49, 35, 0.08);
+  --sp-font-ui: Georgia, "Times New Roman", serif;
+  --sp-font-meta: "Segoe UI", Tahoma, sans-serif;
+}

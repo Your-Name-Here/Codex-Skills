@@ -1,0 +1,1648 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tactical Dark Specimen</title>
+    <link rel="stylesheet" href="../tokens.css">
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      :root {
+        color-scheme: dark;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        padding: 12px;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 96px),
+          var(--td-bg);
+        color: var(--td-text);
+        font: 13px/1.4 var(--td-font-ui);
+      }
+
+      button,
+      input,
+      select,
+      textarea {
+        font: inherit;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      h1,
+      h2,
+      h3,
+      p,
+      ul {
+        margin: 0;
+      }
+
+      summary {
+        cursor: pointer;
+      }
+
+      kbd {
+        padding: 2px 6px;
+        border: 1px solid var(--td-border);
+        border-radius: var(--td-radius-tight);
+        background: var(--td-surface-2);
+        color: var(--td-text-muted);
+        font: 12px var(--td-font-mono);
+      }
+
+      .app-shell {
+        display: grid;
+        grid-template-columns: 220px minmax(0, 1fr);
+        min-height: calc(100vh - 24px);
+        border: 1px solid rgba(143, 160, 183, 0.28);
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: 0 18px 44px rgba(0, 0, 0, 0.34);
+        background: #0a0f15;
+      }
+
+      .sidebar {
+        position: sticky;
+        top: 0;
+        height: calc(100vh - 24px);
+        padding: 12px;
+        border-right: 1px solid var(--td-border);
+        background: rgba(8, 11, 17, 0.96);
+      }
+
+      .sidebar-brand,
+      .toolbar,
+      .toolbar-group,
+      .row,
+      .check-row,
+      .toggle-row,
+      .modal-head,
+      .breadcrumbs,
+      .status-bar,
+      .space-row,
+      .mini-toolbar,
+      .table-actions {
+        display: flex;
+        align-items: center;
+      }
+
+      .sidebar-brand,
+      .stack,
+      .field,
+      .surface,
+      .section,
+      .layout-demo,
+      .empty-state,
+      .command-palette,
+      .menu,
+      .dropdown,
+      .accordion,
+      .mini-sidebar {
+        display: grid;
+        gap: 12px;
+      }
+
+      .sidebar-brand {
+        gap: 12px;
+        margin-bottom: 14px;
+      }
+
+      .sidebar-nav {
+        display: grid;
+        gap: 8px;
+        margin-top: 10px;
+      }
+
+      .nav-link {
+        padding: 7px 9px;
+        border: 1px solid transparent;
+        border-radius: var(--td-radius-tight);
+        color: var(--td-text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        font-size: 11px;
+      }
+
+      .nav-link:hover,
+      .nav-link.active {
+        border-color: var(--td-border);
+        background: var(--td-surface);
+        color: var(--td-text);
+      }
+
+      .nav-link.active {
+        box-shadow: inset 2px 0 0 var(--td-accent);
+      }
+
+      .workspace {
+        min-width: 0;
+        background:
+          radial-gradient(circle at top left, rgba(46, 170, 220, 0.08), transparent 24%),
+          #0c1118;
+      }
+
+      .toolbar {
+        justify-content: space-between;
+        gap: 16px;
+        padding: 10px 12px;
+        border-bottom: 1px solid var(--td-border);
+        background: rgba(10, 14, 20, 0.94);
+      }
+
+      .toolbar-title {
+        display: grid;
+        gap: 2px;
+      }
+
+      .toolbar-center {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        justify-content: center;
+        flex: 1;
+      }
+
+      .top-pill {
+        min-height: 28px;
+        padding: 0 10px;
+        display: inline-flex;
+        align-items: center;
+        border: 1px solid var(--td-border);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.02);
+        color: var(--td-text-muted);
+        font-size: 11px;
+      }
+
+      .top-pill.active {
+        border-color: rgba(255, 255, 255, 0.22);
+        background: linear-gradient(180deg, rgba(88, 196, 255, 0.14), rgba(255, 255, 255, 0.02));
+        color: var(--td-text);
+      }
+
+      .toolbar-group,
+      .row,
+      .check-row,
+      .toggle-row,
+      .modal-head,
+      .breadcrumbs,
+      .status-bar,
+      .space-row,
+      .mini-toolbar,
+      .table-actions {
+        gap: 10px;
+      }
+
+      .row {
+        flex-wrap: wrap;
+      }
+
+      .page {
+        padding: 12px;
+        display: grid;
+        gap: 12px;
+      }
+
+      .section {
+        padding: 10px;
+        border: 1px solid var(--td-border);
+        border-radius: var(--td-radius-tight);
+        background: rgba(18, 24, 34, 0.98);
+        box-shadow: none;
+      }
+
+      .section-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+
+      .sample-grid {
+        display: grid;
+        gap: 10px;
+        align-items: start;
+      }
+
+      .sample-grid.two-up {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      }
+
+      .sample-grid.three-up {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .metric-grid {
+        display: grid;
+        gap: 10px;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .metric-card {
+        min-height: 86px;
+        display: grid;
+        gap: 10px;
+      }
+
+      .metric-card strong {
+        font-size: 28px;
+        font-weight: 600;
+      }
+
+      .surface,
+      .modal-mock,
+      .popover,
+      .tooltip-chip,
+      .shell-demo,
+      .command-palette,
+      .split-main,
+      .inspector-panel,
+      .mini-sidebar {
+        padding: 10px;
+        border: 1px solid var(--td-border);
+        border-radius: var(--td-radius-tight);
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent),
+          var(--td-surface);
+      }
+
+      .surface.accent-blue {
+        background:
+          radial-gradient(circle at top right, rgba(88, 196, 255, 0.12), transparent 42%),
+          var(--td-surface);
+      }
+
+      .surface.accent-warn {
+        background:
+          radial-gradient(circle at bottom right, rgba(247, 185, 85, 0.1), transparent 46%),
+          var(--td-surface);
+      }
+
+      .surface h3,
+      .section h2 {
+        letter-spacing: 0.01em;
+      }
+
+      .card,
+      .modal-mock,
+      .empty-state {
+        box-shadow: none;
+      }
+
+      .type-xl {
+        font-size: clamp(1.8rem, 3vw, 2.45rem);
+        letter-spacing: -0.03em;
+      }
+
+      .type-lg {
+        font-size: 1.2rem;
+      }
+
+      .type-md {
+        font-size: 0.96rem;
+      }
+
+      .muted,
+      .small {
+        color: var(--td-text-muted);
+      }
+
+      .small {
+        font-size: 12px;
+      }
+
+      .mono {
+        font-family: var(--td-font-mono);
+      }
+
+      .btn,
+      .icon-btn,
+      .menu-item,
+      .tab,
+      .page-link,
+      .tool-btn {
+        border: 1px solid var(--td-border);
+        background: var(--td-surface-2);
+        color: var(--td-text);
+        border-radius: var(--td-radius-tight);
+        cursor: pointer;
+      }
+
+      .btn,
+      .menu-item,
+      .tab,
+      .tool-btn {
+        min-height: 30px;
+        padding: 5px 10px;
+        font-size: 12px;
+      }
+
+      .btn.primary,
+      .tool-btn.primary {
+        border-color: var(--td-accent-strong);
+        background: linear-gradient(180deg, var(--td-accent), var(--td-accent-strong));
+        color: #041018;
+      }
+
+      .btn.danger {
+        border-color: var(--td-danger);
+        background: rgba(255, 111, 111, 0.1);
+        color: var(--td-danger);
+      }
+
+      .btn.ghost {
+        background: transparent;
+      }
+
+      .btn.active,
+      .icon-btn.active,
+      .tab.active,
+      .page-link.active {
+        border-color: var(--td-accent);
+        background: rgba(88, 196, 255, 0.12);
+      }
+
+      .tab,
+      .page-link,
+      .button-group .btn,
+      .tool-btn,
+      .btn {
+        font-weight: 600;
+      }
+
+      .btn:disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+      }
+
+      .icon-btn {
+        width: 30px;
+        height: 30px;
+        display: inline-grid;
+        place-items: center;
+        padding: 0;
+        font-size: 12px;
+      }
+
+      .button-group {
+        display: inline-flex;
+      }
+
+      .button-group > * {
+        border-radius: 0;
+      }
+
+      .button-group > *:first-child {
+        border-top-left-radius: var(--td-radius-tight);
+        border-bottom-left-radius: var(--td-radius-tight);
+      }
+
+      .button-group > *:last-child {
+        border-top-right-radius: var(--td-radius-tight);
+        border-bottom-right-radius: var(--td-radius-tight);
+      }
+
+      .dropdown {
+        position: relative;
+        width: max-content;
+      }
+
+      .dropdown > summary {
+        list-style: none;
+      }
+
+      .dropdown > summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .menu {
+        position: absolute;
+        top: calc(100% + 8px);
+        left: 0;
+        min-width: 160px;
+        z-index: 2;
+      }
+
+      .menu-item {
+        text-align: left;
+      }
+
+      .danger-text {
+        color: var(--td-danger);
+      }
+
+      .field-grid {
+        display: grid;
+        gap: 10px;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      }
+
+      .chip-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+
+      .filter-chip {
+        min-height: 24px;
+        padding: 0 8px;
+        display: inline-flex;
+        align-items: center;
+        border: 1px solid var(--td-border);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.02);
+        color: var(--td-text-muted);
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+
+      .filter-chip.active {
+        border-color: var(--td-accent);
+        color: var(--td-text);
+        background: rgba(88, 196, 255, 0.12);
+      }
+
+      .field.wide {
+        grid-column: 1 / -1;
+      }
+
+      .input,
+      .search-box,
+      input[type="range"] {
+        width: 100%;
+      }
+
+      .input,
+      .search-box,
+      .pill-input {
+        background: var(--td-surface-2);
+        color: var(--td-text);
+        border: 1px solid var(--td-border);
+        border-radius: var(--td-radius-tight);
+      }
+
+      .input,
+      .pill-input {
+        min-height: 30px;
+        padding: 5px 8px;
+      }
+
+      .search-box {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0 10px;
+      }
+
+      .search-input {
+        width: 100%;
+        padding: 5px 0;
+        border: 0;
+        background: transparent;
+        color: inherit;
+        outline: none;
+      }
+
+      .search-icon {
+        color: var(--td-text-muted);
+      }
+
+      .toggle-row {
+        justify-content: space-between;
+      }
+
+      .toggle {
+        position: relative;
+      }
+
+      .toggle input {
+        position: absolute;
+        opacity: 0;
+        inset: 0;
+      }
+
+      .toggle-track {
+        display: block;
+        width: 38px;
+        height: 20px;
+        border-radius: 999px;
+        border: 1px solid var(--td-border);
+        background: var(--td-surface-2);
+        position: relative;
+      }
+
+      .toggle-track::after {
+        content: "";
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: var(--td-text);
+        transition: transform 0.16s ease;
+      }
+
+      .toggle input:checked + .toggle-track {
+        background: rgba(88, 196, 255, 0.22);
+      }
+
+      .toggle input:checked + .toggle-track::after {
+        transform: translateX(18px);
+      }
+
+      .tabs,
+      .pagination {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        align-items: center;
+      }
+
+      .tabs-demo,
+      .tab-panels {
+        display: grid;
+        gap: 12px;
+      }
+
+      .tab-panel {
+        padding: 10px;
+        border: 1px solid var(--td-border);
+        border-radius: var(--td-radius-tight);
+        background: var(--td-surface-2);
+      }
+
+      .page-link {
+        min-width: 32px;
+        height: 30px;
+        padding: 0 10px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+      }
+
+      .page-link-wide {
+        min-width: 52px;
+      }
+
+      .breadcrumbs {
+        flex-wrap: wrap;
+        color: var(--td-text-muted);
+      }
+
+      .table {
+        width: 100%;
+        border-collapse: collapse;
+        overflow: hidden;
+        border: 1px solid var(--td-border);
+        border-radius: var(--td-radius-tight);
+      }
+
+      .table thead th {
+        position: sticky;
+        top: 0;
+      }
+
+      .table th,
+      .table td {
+        padding: 6px 8px;
+        text-align: left;
+        border-bottom: 1px solid var(--td-border);
+      }
+
+      .table thead {
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      .table th {
+        color: var(--td-text-muted);
+        font-size: 11px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .table td:last-child,
+      .table td:nth-child(3),
+      .table.dense td,
+      .mono-num {
+        font-family: var(--td-font-mono);
+      }
+
+      .table.dense th,
+      .table.dense td {
+        padding: 5px 8px;
+        font-size: 12px;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        min-height: 18px;
+        padding: 1px 6px;
+        border: 1px solid var(--td-border);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.02);
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+      }
+
+      .badge.success {
+        color: var(--td-success);
+      }
+
+      .badge.warning {
+        color: var(--td-warn);
+      }
+
+      .badge.danger {
+        color: var(--td-danger);
+      }
+
+      .data-list,
+      .tree,
+      .tree ul,
+      .command-results {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .data-list li,
+      .command-results li {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 6px 0;
+        border-bottom: 1px solid var(--td-border);
+      }
+
+      .tree li {
+        padding: 4px 0;
+      }
+
+      .tree ul {
+        padding-left: 16px;
+        margin-top: 4px;
+        border-left: 1px dashed var(--td-border);
+      }
+
+      .progress {
+        width: 100%;
+        height: 10px;
+        overflow: hidden;
+        border: 1px solid var(--td-border);
+        border-radius: 999px;
+        background: var(--td-surface-2);
+      }
+
+      .progress-bar {
+        display: block;
+        height: 100%;
+        background: linear-gradient(90deg, var(--td-accent), var(--td-accent-strong));
+      }
+
+      .swatch-grid {
+        display: grid;
+        gap: 10px;
+        grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+      }
+
+      .swatch {
+        display: grid;
+        gap: 8px;
+      }
+
+      .swatch-chip {
+        width: 100%;
+        height: 36px;
+        border: 1px solid var(--td-border);
+        border-radius: var(--td-radius-tight);
+      }
+
+      .bg-main { background: var(--td-bg); }
+      .bg-panel { background: var(--td-surface); }
+      .bg-panel-2 { background: var(--td-surface-2); }
+      .bg-accent { background: var(--td-accent); }
+      .bg-success { background: var(--td-success); }
+      .bg-warning { background: var(--td-warn); }
+      .bg-danger { background: var(--td-danger); }
+
+      .spacing-samples {
+        display: grid;
+        gap: 8px;
+      }
+
+      .space-label {
+        width: 28px;
+        color: var(--td-text-muted);
+        font-family: var(--td-font-mono);
+      }
+
+      .space-bar {
+        height: 10px;
+        border-radius: 999px;
+        background: rgba(88, 196, 255, 0.3);
+      }
+
+      .space-1 { width: 4px; }
+      .space-2 { width: 8px; }
+      .space-3 { width: 12px; }
+      .space-4 { width: 16px; }
+      .space-5 { width: 24px; }
+
+      .icon-tile,
+      .avatar-placeholder {
+        display: inline-grid;
+        place-items: center;
+        border: 1px solid var(--td-border);
+        background: var(--td-surface-2);
+        color: var(--td-text);
+      }
+
+      .icon-tile {
+        width: 30px;
+        height: 30px;
+        border-radius: var(--td-radius-tight);
+        font-size: 12px;
+      }
+
+      .avatar-placeholder {
+        width: 56px;
+        height: 56px;
+        border-radius: var(--td-radius-tight);
+      }
+
+      .avatar-placeholder.large {
+        width: 70px;
+        height: 70px;
+        margin: 0 auto;
+      }
+
+      .empty-state {
+        place-items: center;
+        text-align: center;
+      }
+
+      .modal-head {
+        justify-content: space-between;
+        align-items: start;
+      }
+
+      .modal-head .icon-btn {
+        margin-left: auto;
+      }
+
+      .popover-demo {
+        display: grid;
+        gap: 12px;
+        justify-items: start;
+      }
+
+      .popover-wrap,
+      .tooltip-wrap {
+        position: relative;
+      }
+
+      .tooltip-wrap {
+        display: inline-flex;
+      }
+
+      .popover-trigger[aria-expanded="true"] {
+        border-color: var(--td-accent);
+        background: rgba(88, 196, 255, 0.16);
+      }
+
+      .popover {
+        position: absolute;
+        top: calc(100% + 8px);
+        left: 0;
+        width: 240px;
+        max-width: 240px;
+        z-index: 3;
+      }
+
+      .tooltip-bubble {
+        position: absolute;
+        left: 50%;
+        bottom: calc(100% + 10px);
+        transform: translateX(-50%) translateY(4px);
+        min-width: 180px;
+        max-width: 220px;
+        padding: 8px 10px;
+        border: 1px solid var(--td-border);
+        border-radius: var(--td-radius-tight);
+        background: var(--td-surface);
+        color: var(--td-text);
+        box-shadow: var(--td-shadow);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.16s ease, transform 0.16s ease;
+      }
+
+      .tooltip-target:hover + .tooltip-bubble,
+      .tooltip-target:focus-visible + .tooltip-bubble {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+
+      .accordion-list {
+        display: grid;
+        overflow: hidden;
+        border: 1px solid var(--td-border);
+        border-radius: var(--td-radius-tight);
+        background: var(--td-surface-2);
+      }
+
+      .accordion {
+        background: transparent;
+      }
+
+      .accordion + .accordion {
+        border-top: 1px solid var(--td-border);
+      }
+
+      .accordion summary {
+        display: flex;
+        align-items: center;
+        min-height: 34px;
+        padding: 7px 10px;
+        list-style: none;
+      }
+
+      .accordion summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .accordion summary::before {
+        content: "";
+        width: 10px;
+        height: 10px;
+        margin-right: 10px;
+        border-right: 2px solid var(--td-text);
+        border-bottom: 2px solid var(--td-text);
+        transform: rotate(-45deg);
+        transition: transform 0.16s ease;
+      }
+
+      .accordion[open] summary::before {
+        transform: rotate(45deg);
+      }
+
+      .accordion p {
+        padding: 0 10px 10px;
+      }
+
+      .layout-stack {
+        display: grid;
+        gap: 14px;
+      }
+
+      .shell-demo {
+        overflow: hidden;
+      }
+
+      .mini-toolbar,
+      .status-bar {
+        justify-content: space-between;
+        padding: 8px 10px;
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      .shell-demo .mini-content {
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.015), transparent),
+          var(--td-surface-2);
+      }
+
+      .mini-content,
+      .split-main {
+        min-height: 120px;
+        display: grid;
+        place-items: center;
+        color: var(--td-text-muted);
+      }
+
+      .split-pane {
+        display: grid;
+        gap: 12px;
+        grid-template-columns: minmax(0, 2fr) minmax(220px, 1fr);
+      }
+
+      .command-input {
+        padding: 8px 10px;
+        border: 1px solid var(--td-border);
+        border-radius: var(--td-radius-tight);
+        background: var(--td-surface-2);
+        color: var(--td-text-muted);
+      }
+
+      @media (max-width: 900px) {
+        .app-shell {
+          grid-template-columns: 1fr;
+        }
+
+        .sidebar {
+          position: static;
+          height: auto;
+          border-right: 0;
+          border-bottom: 1px solid var(--td-border);
+        }
+
+        .split-pane {
+          grid-template-columns: 1fr;
+        }
+
+        .metric-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 640px) {
+        .toolbar,
+        .section-head,
+        .toolbar-group {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .toolbar-center {
+          width: 100%;
+          justify-content: flex-start;
+          flex-wrap: wrap;
+        }
+
+        .metric-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .page,
+        .toolbar,
+        .sidebar {
+          padding: 14px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="sidebar-brand">
+          <span class="icon-tile">TD</span>
+          <div>
+            <strong>Tactical Dark</strong>
+            <div class="small">Dense tool specimen</div>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav" aria-label="Primary">
+          <a class="nav-link active" href="#foundations">Foundations</a>
+          <a class="nav-link" href="#actions">Actions</a>
+          <a class="nav-link" href="#inputs">Inputs</a>
+          <a class="nav-link" href="#navigation">Navigation</a>
+          <a class="nav-link" href="#surfaces">Surfaces</a>
+          <a class="nav-link" href="#data">Data</a>
+          <a class="nav-link" href="#layouts">App Layouts</a>
+        </nav>
+      </aside>
+
+      <div class="workspace">
+        <header class="toolbar">
+          <div class="toolbar-group">
+            <button class="icon-btn" aria-label="Menu">≡</button>
+            <div class="toolbar-title">
+              <h1>Operations Console</h1>
+              <p class="muted">Dense control-surface specimen for dashboards, editors, and monitoring tools.</p>
+            </div>
+          </div>
+          <div class="toolbar-center" aria-label="Primary views">
+            <span class="top-pill active">Overview</span>
+            <span class="top-pill">Messages</span>
+            <span class="top-pill">Transactions</span>
+            <span class="top-pill">Settings</span>
+          </div>
+          <div class="toolbar-group">
+            <div class="search-box">
+              <span class="search-icon">⌕</span>
+              <input class="search-input" type="search" placeholder="Find symbol, alert, or command">
+            </div>
+            <button class="tool-btn">Sync</button>
+            <button class="tool-btn primary">Run Scan</button>
+          </div>
+        </header>
+
+        <main class="page">
+          <nav class="breadcrumbs" aria-label="Breadcrumb">
+            <a href="#">Catalog</a>
+            <span>/</span>
+            <a href="#">Tactical Dark</a>
+            <span>/</span>
+            <span aria-current="page">Examples</span>
+          </nav>
+
+          <section class="metric-grid" aria-label="Top metrics">
+            <article class="surface metric-card">
+              <span class="small">Queued Jobs</span>
+              <strong>128</strong>
+            </article>
+            <article class="surface metric-card accent-blue">
+              <span class="small">Active Workers</span>
+              <strong>24</strong>
+            </article>
+            <article class="surface metric-card">
+              <span class="small">Warning Count</span>
+              <strong>07</strong>
+            </article>
+            <article class="surface metric-card accent-warn">
+              <span class="small">Blocked Tasks</span>
+              <strong>02</strong>
+            </article>
+          </section>
+
+          <section class="section stack" id="foundations">
+            <div class="section-head">
+              <h2>Foundations</h2>
+              <p class="muted">Typography, swatches, spacing, and icon placeholders.</p>
+            </div>
+
+            <div class="sample-grid two-up">
+              <article class="surface stack">
+                <h3>Typography</h3>
+                <div class="stack">
+                  <h1 class="type-xl">Execution Monitor</h1>
+                  <h2 class="type-lg">Live Queue Summary</h2>
+                  <h3 class="type-md">Inspector Detail</h3>
+                  <p>Body text for dashboards, inspectors, and operator workflows.</p>
+                  <p class="muted">Muted metadata, helper text, or low-priority context.</p>
+                  <p class="mono">JOB_ID=AX-2044 / LATENCY=024MS</p>
+                </div>
+              </article>
+
+              <article class="surface stack">
+                <h3>Color Swatches</h3>
+                <div class="swatch-grid">
+                  <div class="swatch"><span class="swatch-chip bg-main"></span><strong>Background</strong></div>
+                  <div class="swatch"><span class="swatch-chip bg-panel"></span><strong>Surface</strong></div>
+                  <div class="swatch"><span class="swatch-chip bg-panel-2"></span><strong>Surface 2</strong></div>
+                  <div class="swatch"><span class="swatch-chip bg-accent"></span><strong>Accent</strong></div>
+                  <div class="swatch"><span class="swatch-chip bg-success"></span><strong>Success</strong></div>
+                  <div class="swatch"><span class="swatch-chip bg-warning"></span><strong>Warning</strong></div>
+                  <div class="swatch"><span class="swatch-chip bg-danger"></span><strong>Danger</strong></div>
+                </div>
+              </article>
+
+              <article class="surface stack">
+                <h3>Spacing Samples</h3>
+                <div class="spacing-samples">
+                  <div class="space-row"><span class="space-label">4</span><span class="space-bar space-1"></span></div>
+                  <div class="space-row"><span class="space-label">8</span><span class="space-bar space-2"></span></div>
+                  <div class="space-row"><span class="space-label">12</span><span class="space-bar space-3"></span></div>
+                  <div class="space-row"><span class="space-label">16</span><span class="space-bar space-4"></span></div>
+                  <div class="space-row"><span class="space-label">24</span><span class="space-bar space-5"></span></div>
+                </div>
+              </article>
+
+              <article class="surface stack">
+                <h3>Icons / Placeholders</h3>
+                <div class="row">
+                  <span class="icon-tile">A</span>
+                  <span class="icon-tile">+</span>
+                  <span class="icon-tile">★</span>
+                  <span class="icon-tile">?</span>
+                  <div class="avatar-placeholder">IMG</div>
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <section class="section stack" id="actions">
+            <div class="section-head">
+              <h2>Actions</h2>
+              <p class="muted">Buttons, icon buttons, grouped actions, and menu triggers.</p>
+            </div>
+
+            <div class="sample-grid two-up">
+              <article class="surface stack">
+                <h3>Buttons</h3>
+                <div class="row">
+                  <button class="btn">Default</button>
+                  <button class="btn primary">Primary</button>
+                  <button class="btn danger">Danger</button>
+                  <button class="btn ghost">Ghost</button>
+                  <button class="btn" disabled>Disabled</button>
+                </div>
+              </article>
+
+              <article class="surface stack">
+                <h3>Icon Buttons</h3>
+                <div class="row">
+                  <button class="icon-btn" aria-label="Add">+</button>
+                  <button class="icon-btn" aria-label="Edit">✎</button>
+                  <button class="icon-btn active" aria-label="Favorite">★</button>
+                  <button class="icon-btn" aria-label="Delete">×</button>
+                </div>
+              </article>
+
+              <article class="surface stack">
+                <h3>Button Group</h3>
+                <div class="button-group" role="group" aria-label="View mode">
+                  <button class="btn active">List</button>
+                  <button class="btn">Grid</button>
+                  <button class="btn">Split</button>
+                </div>
+              </article>
+
+              <article class="surface stack">
+                <h3>Dropdown Menu</h3>
+                <details class="dropdown">
+                  <summary class="btn">Open Menu</summary>
+                  <div class="menu" role="menu">
+                    <button class="menu-item" role="menuitem">Rename</button>
+                    <button class="menu-item" role="menuitem">Duplicate</button>
+                    <button class="menu-item danger-text" role="menuitem">Delete</button>
+                  </div>
+                </details>
+              </article>
+            </div>
+          </section>
+
+          <section class="section stack" id="inputs">
+            <div class="section-head">
+              <h2>Inputs</h2>
+              <p class="muted">Text entry, selections, toggles, search, and slider controls.</p>
+            </div>
+
+            <div class="sample-grid two-up">
+              <article class="surface stack">
+                <h3>Inline Filters</h3>
+                <div class="chip-row">
+                  <span class="filter-chip active">Live</span>
+                  <span class="filter-chip">Queued</span>
+                  <span class="filter-chip">Review</span>
+                  <span class="filter-chip">Errors</span>
+                </div>
+              </article>
+
+              <article class="surface stack">
+                <h3>Field Set</h3>
+                <div class="field-grid">
+                  <label class="field">
+                    <span>Text Input</span>
+                    <input class="input" value="SIG_PROC_A">
+                  </label>
+
+                  <label class="field">
+                    <span>Search Box</span>
+                    <div class="search-box">
+                      <span class="search-icon">⌕</span>
+                      <input class="search-input" type="search" placeholder="Find symbols or alerts">
+                    </div>
+                  </label>
+
+                  <label class="field wide">
+                    <span>Textarea</span>
+                    <textarea class="input" rows="4">Batch paused after threshold breach. Awaiting manual review.</textarea>
+                  </label>
+
+                  <label class="field">
+                    <span>Select</span>
+                    <select class="input">
+                      <option>Tracking</option>
+                      <option>Review</option>
+                      <option>Blocked</option>
+                    </select>
+                  </label>
+                </div>
+              </article>
+
+              <article class="surface stack">
+                <h3>Choice Controls</h3>
+                <label class="check-row">
+                  <input type="checkbox" checked>
+                  <span>Enable live execution</span>
+                </label>
+
+                <div class="stack">
+                  <label class="check-row">
+                    <input type="radio" name="mode" checked>
+                  <span>Auto mode</span>
+                  </label>
+                  <label class="check-row">
+                    <input type="radio" name="mode">
+                  <span>Manual mode</span>
+                  </label>
+                </div>
+
+                <label class="toggle-row">
+                  <span>Throttle</span>
+                  <span class="toggle">
+                    <input type="checkbox" checked>
+                    <span class="toggle-track"></span>
+                  </span>
+                </label>
+
+                <label class="field">
+                  <span>Range Slider</span>
+                  <input type="range" value="58">
+                </label>
+              </article>
+            </div>
+          </section>
+
+          <section class="section stack" id="navigation">
+            <div class="section-head">
+              <h2>Navigation</h2>
+              <p class="muted">Tabs, breadcrumbs, pagination, and a compact sidebar sample.</p>
+            </div>
+
+            <div class="sample-grid two-up">
+              <article class="surface stack">
+                <h3>Tabs</h3>
+                <div class="tabs-demo">
+                  <div class="tabs" role="tablist" aria-label="Tactical tabs">
+                    <button class="tab active" type="button" role="tab" id="td-tab-overview" aria-selected="true" aria-controls="td-panel-overview">Queue</button>
+                    <button class="tab" type="button" role="tab" id="td-tab-signals" aria-selected="false" aria-controls="td-panel-signals" tabindex="-1">Signals</button>
+                    <button class="tab" type="button" role="tab" id="td-tab-history" aria-selected="false" aria-controls="td-panel-history" tabindex="-1">Logs</button>
+                  </div>
+                  <div class="tab-panels">
+                    <section class="tab-panel" id="td-panel-overview" role="tabpanel" aria-labelledby="td-tab-overview">
+                      <p class="muted">Queue content with current workload, active scans, and blocked items.</p>
+                    </section>
+                    <section class="tab-panel" id="td-panel-signals" role="tabpanel" aria-labelledby="td-tab-signals" hidden>
+                      <p class="muted">Signals content with queue state, batches, and filters.</p>
+                    </section>
+                    <section class="tab-panel" id="td-panel-history" role="tabpanel" aria-labelledby="td-tab-history" hidden>
+                      <p class="muted">Logs content with execution events, warnings, and audit notes.</p>
+                    </section>
+                  </div>
+                </div>
+              </article>
+
+              <article class="surface stack">
+                <h3>Pagination</h3>
+                <nav class="pagination" aria-label="Pagination">
+                  <button class="page-link page-link-wide" type="button">Prev</button>
+                  <button class="page-link active" type="button" aria-current="page">1</button>
+                  <button class="page-link" type="button">2</button>
+                  <button class="page-link" type="button">3</button>
+                  <button class="page-link page-link-wide" type="button">Next</button>
+                </nav>
+              </article>
+
+              <article class="surface stack">
+                <h3>Sidebar Nav</h3>
+                <div class="mini-sidebar">
+                  <a class="nav-link active" href="#">Overview</a>
+                  <a class="nav-link" href="#">Positions</a>
+                  <a class="nav-link" href="#">Alerts</a>
+                  <a class="nav-link" href="#">Settings</a>
+                </div>
+              </article>
+
+              <article class="surface stack">
+                <h3>Breadcrumbs</h3>
+                <nav class="breadcrumbs" aria-label="Secondary breadcrumb">
+                  <a href="#">Workspace</a>
+                  <span>/</span>
+                  <a href="#">Signals</a>
+                  <span>/</span>
+                  <span aria-current="page">Batch Review</span>
+                </nav>
+              </article>
+            </div>
+          </section>
+
+          <section class="section stack" id="surfaces">
+            <div class="section-head">
+              <h2>Surfaces</h2>
+              <p class="muted">Cards, panels, overlays, collapsible sections, and helper surfaces.</p>
+            </div>
+
+            <div class="sample-grid two-up">
+              <article class="surface stack">
+                <h3>Card</h3>
+                <p class="muted">Compact status module for queue or signal monitoring.</p>
+                <div class="row">
+                  <span class="badge success">Live</span>
+                  <button class="btn">Inspect</button>
+                </div>
+              </article>
+
+              <article class="surface stack">
+                <h3>Panel</h3>
+                <p class="muted">Useful for inspectors, grouped controls, and stacked operational data.</p>
+              </article>
+
+              <article class="modal-mock stack">
+                <div class="modal-head">
+                  <h3>Modal / Dialog</h3>
+                  <button class="icon-btn" aria-label="Close">×</button>
+                </div>
+                <p class="muted">Confirmation or focused-edit pattern.</p>
+                <div class="row">
+                  <button class="btn">Abort</button>
+                  <button class="btn primary">Confirm</button>
+                </div>
+              </article>
+
+              <article class="surface stack">
+                <h3>Popover / Tooltip</h3>
+                <div class="popover-demo">
+                  <div class="row">
+                    <div class="popover-wrap">
+                      <button class="btn popover-trigger" type="button" aria-expanded="false" aria-controls="td-popover">Filter Options</button>
+                      <div class="popover" id="td-popover" hidden>
+                        <strong>Quick Filters</strong>
+                        <p class="muted">Use this for anchored actions, narrow filters, or small contextual forms.</p>
+                        <label class="check-row">
+                          <input type="checkbox" checked>
+                          <span>Only show active symbols</span>
+                        </label>
+                      </div>
+                    </div>
+                    <span class="tooltip-wrap">
+                      <button class="tooltip-target icon-btn" type="button" aria-describedby="td-tooltip">?</button>
+                      <span class="tooltip-bubble" id="td-tooltip" role="tooltip">Short helper text on hover or focus.</span>
+                    </span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="surface stack">
+                <h3>Accordion</h3>
+                <div class="accordion-list">
+                  <details class="accordion" open>
+                    <summary>Display Settings</summary>
+                    <p class="muted">Expand this area for secondary settings or reference info.</p>
+                  </details>
+                  <details class="accordion">
+                    <summary>Keyboard Shortcuts</summary>
+                    <p class="muted">Use additional entries to show grouped settings, help, or context.</p>
+                  </details>
+                  <details class="accordion">
+                    <summary>Advanced Options</summary>
+                    <p class="muted">Closed entries should stay compact and only reveal content when opened.</p>
+                  </details>
+                </div>
+              </article>
+
+              <article class="surface stack">
+                <h3>Details / Summary</h3>
+                <details>
+                  <summary>View more context</summary>
+                  <p class="muted">Native disclosure pattern for docs or secondary metadata.</p>
+                </details>
+              </article>
+            </div>
+          </section>
+
+          <section class="section stack" id="data">
+            <div class="section-head">
+              <h2>Data</h2>
+              <p class="muted">Tables, lists, trees, status markers, and loading/empty patterns.</p>
+            </div>
+
+            <div class="sample-grid three-up">
+              <article class="surface stack">
+                <h3>Table</h3>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Symbol</th>
+                      <th>Status</th>
+                      <th>Updated</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>NVDA</td>
+                      <td><span class="badge success">Tracking</span></td>
+                      <td class="mono-num">09:41:12</td>
+                    </tr>
+                    <tr>
+                      <td>BTC</td>
+                      <td><span class="badge warning">Review</span></td>
+                      <td class="mono-num">09:39:44</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </article>
+
+              <article class="surface stack">
+                <h3>Dense Table</h3>
+                <table class="table dense">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>State</th>
+                      <th>ETA</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="mono">A-14</td>
+                      <td>Queued</td>
+                      <td>03m</td>
+                    </tr>
+                    <tr>
+                      <td class="mono">B-02</td>
+                      <td>Running</td>
+                      <td>11m</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </article>
+
+              <article class="surface stack">
+                <h3>List</h3>
+                <ul class="data-list">
+                  <li><span>Batch Review</span><span class="badge">4</span></li>
+                  <li><span>Error Queue</span><span class="badge warning">2</span></li>
+                  <li><span>Completed Scan</span><span class="badge success">Done</span></li>
+                </ul>
+              </article>
+
+              <article class="surface stack">
+                <h3>Tree View</h3>
+                <ul class="tree">
+                  <li>
+                    <span>signals</span>
+                    <ul>
+                      <li><span>realtime</span></li>
+                      <li><span>archive</span></li>
+                    </ul>
+                  </li>
+                  <li><span>alerts</span></li>
+                  <li><span>logs</span></li>
+                </ul>
+              </article>
+
+              <article class="surface stack">
+                <h3>Badges / Progress</h3>
+                <div class="row">
+                  <span class="badge">Neutral</span>
+                  <span class="badge success">Success</span>
+                  <span class="badge warning">Warning</span>
+                  <span class="badge danger">Danger</span>
+                </div>
+                <div class="progress" aria-label="Progress">
+                  <span class="progress-bar" style="width: 62%;"></span>
+                </div>
+              </article>
+
+              <article class="empty-state stack">
+                <div class="avatar-placeholder large">0</div>
+                <h3>Empty State</h3>
+                <p class="muted">No blocked jobs. Queue is clear and processing normally.</p>
+                <button class="btn primary">Open Queue</button>
+              </article>
+            </div>
+          </section>
+
+          <section class="section stack" id="layouts">
+            <div class="section-head">
+              <h2>App Layouts</h2>
+              <p class="muted">Shell, split panes, inspector, status bars, and command palette mockups.</p>
+            </div>
+
+            <div class="layout-stack">
+              <article class="layout-demo stack">
+                <h3>App Shell / Toolbar / Status Bar</h3>
+                <div class="shell-demo">
+                  <header class="mini-toolbar">
+                    <span class="badge">Project</span>
+                    <span class="muted">Toolbar actions</span>
+                  </header>
+                  <div class="mini-content">Main workspace content</div>
+                  <footer class="status-bar">
+                    <span>Connected</span>
+                    <span>3 tasks</span>
+                    <span>Ready</span>
+                  </footer>
+                </div>
+              </article>
+
+              <article class="layout-demo stack">
+                <h3>Split Pane / Inspector Panel</h3>
+                <div class="split-pane">
+                  <div class="split-main">Canvas or document pane</div>
+                  <aside class="inspector-panel">
+                    <strong>Inspector</strong>
+                    <p class="muted">Property fields, metadata, and actions.</p>
+                  </aside>
+                </div>
+              </article>
+
+              <article class="layout-demo stack">
+                <h3>Command Palette Mockup</h3>
+                <div class="command-palette">
+                  <div class="command-input">Type a command or search...</div>
+                  <ul class="command-results">
+                    <li><span>Open Signal Detail</span><kbd>Enter</kbd></li>
+                    <li><span>Run Style Audit</span><kbd>Ctrl+K</kbd></li>
+                    <li><span>Switch View Mode</span><kbd>Tab</kbd></li>
+                  </ul>
+                </div>
+              </article>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <script>
+      const tabLists = document.querySelectorAll('[role="tablist"]');
+
+      tabLists.forEach((tabList) => {
+        const tabs = Array.from(tabList.querySelectorAll('[role="tab"]'));
+
+        function activateTab(nextTab) {
+          tabs.forEach((tab) => {
+            const selected = tab === nextTab;
+            const panel = document.getElementById(tab.getAttribute('aria-controls'));
+
+            tab.classList.toggle('active', selected);
+            tab.setAttribute('aria-selected', String(selected));
+            tab.tabIndex = selected ? 0 : -1;
+
+            if (panel) {
+              panel.hidden = !selected;
+            }
+          });
+        }
+
+        tabList.addEventListener('click', (event) => {
+          const nextTab = event.target.closest('[role="tab"]');
+          if (!nextTab) return;
+          activateTab(nextTab);
+        });
+
+        tabList.addEventListener('keydown', (event) => {
+          const currentIndex = tabs.indexOf(document.activeElement);
+          if (currentIndex === -1) return;
+
+          let nextIndex = currentIndex;
+
+          if (event.key === 'ArrowRight') nextIndex = (currentIndex + 1) % tabs.length;
+          if (event.key === 'ArrowLeft') nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+          if (event.key === 'Home') nextIndex = 0;
+          if (event.key === 'End') nextIndex = tabs.length - 1;
+
+          if (nextIndex !== currentIndex) {
+            event.preventDefault();
+            const nextTab = tabs[nextIndex];
+            nextTab.focus();
+            activateTab(nextTab);
+          }
+        });
+      });
+
+      const popoverTriggers = document.querySelectorAll('.popover-trigger');
+
+      function closePopover(trigger) {
+        const popover = document.getElementById(trigger.getAttribute('aria-controls'));
+        trigger.setAttribute('aria-expanded', 'false');
+        if (popover) popover.hidden = true;
+      }
+
+      function openPopover(trigger) {
+        const popover = document.getElementById(trigger.getAttribute('aria-controls'));
+        trigger.setAttribute('aria-expanded', 'true');
+        if (popover) popover.hidden = false;
+      }
+
+      popoverTriggers.forEach((trigger) => {
+        trigger.addEventListener('click', () => {
+          const expanded = trigger.getAttribute('aria-expanded') === 'true';
+          popoverTriggers.forEach((item) => closePopover(item));
+          if (!expanded) openPopover(trigger);
+        });
+      });
+
+      document.addEventListener('click', (event) => {
+        if (event.target.closest('.popover-wrap')) return;
+        popoverTriggers.forEach((trigger) => closePopover(trigger));
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key !== 'Escape') return;
+        popoverTriggers.forEach((trigger) => closePopover(trigger));
+      });
+    </script>
+  </body>
+</html>

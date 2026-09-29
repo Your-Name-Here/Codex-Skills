@@ -1,0 +1,17 @@
+:root {
+  --rp-bg: #151327;
+  --rp-surface: #26203f;
+  --rp-surface-2: #33285a;
+  --rp-border: #0c0b19;
+  --rp-text: #f7f3e9;
+  --rp-text-muted: #c0b6d9;
+  --rp-accent: #ff8f3f;
+  --rp-accent-2: #7af2cb;
+  --rp-danger: #ff5d73;
+  --rp-warning: #ffd166;
+  --rp-radius: 2px;
+  --rp-shadow-raised: 0 4px 0 #0c0b19;
+  --rp-shadow-inset: inset 0 -3px 0 rgba(0, 0, 0, 0.3);
+  --rp-font-ui: "Trebuchet MS", "Segoe UI", sans-serif;
+  --rp-font-mono: "Courier New", monospace;
+}

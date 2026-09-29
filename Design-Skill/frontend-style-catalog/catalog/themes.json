@@ -1,0 +1,85 @@
+[
+  {
+    "id": "tactical-dark",
+    "name": "Tactical Dark",
+    "shortDescription": "Dense desktop tool styling with restrained color, sharp hierarchy, and high information density.",
+    "bestFor": [
+      "trading tools",
+      "dev tools",
+      "editors",
+      "dashboards",
+      "control panels"
+    ],
+    "avoidFor": [
+      "SaaS landing pages",
+      "pastel gradients",
+      "oversized cards",
+      "empty whitespace"
+    ],
+    "tags": ["dark", "desktop", "dense", "dashboard", "tooling"],
+    "example": "themes/tactical-dark/examples/index.html",
+    "files": [
+      "themes/tactical-dark/brief.md",
+      "themes/tactical-dark/rules.md",
+      "themes/tactical-dark/tokens.css",
+      "themes/tactical-dark/components.md",
+      "themes/tactical-dark/anti-patterns.md",
+      "themes/tactical-dark/audit.md",
+      "themes/tactical-dark/examples/README.md",
+      "themes/tactical-dark/examples/index.html"
+    ]
+  },
+  {
+    "id": "retro-pixel",
+    "name": "Retro Pixel",
+    "shortDescription": "Pixel-art inspired interface direction for game tools, asset workflows, and playful creative software.",
+    "bestFor": [
+      "sprite editors",
+      "game tools",
+      "asset managers",
+      "creative tools"
+    ],
+    "avoidFor": [
+      "smooth corporate SaaS visuals",
+      "huge rounded cards",
+      "modern marketing layouts"
+    ],
+    "tags": ["pixel", "retro", "games", "editor", "creative"],
+    "files": [
+      "themes/retro-pixel/brief.md",
+      "themes/retro-pixel/rules.md",
+      "themes/retro-pixel/tokens.css",
+      "themes/retro-pixel/components.md",
+      "themes/retro-pixel/anti-patterns.md",
+      "themes/retro-pixel/audit.md",
+      "themes/retro-pixel/examples/README.md"
+    ]
+  },
+  {
+    "id": "soft-productivity",
+    "name": "Soft Productivity",
+    "shortDescription": "Calm notebook-style interface with readable rhythm, gentle contrast, and productive focus.",
+    "bestFor": [
+      "journals",
+      "planners",
+      "recipe apps",
+      "knowledge tools"
+    ],
+    "avoidFor": [
+      "aggressive contrast",
+      "dense control panels",
+      "gamer aesthetics",
+      "dev-tool aesthetics"
+    ],
+    "tags": ["light", "notebook", "calm", "readable", "productivity"],
+    "files": [
+      "themes/soft-productivity/brief.md",
+      "themes/soft-productivity/rules.md",
+      "themes/soft-productivity/tokens.css",
+      "themes/soft-productivity/components.md",
+      "themes/soft-productivity/anti-patterns.md",
+      "themes/soft-productivity/audit.md",
+      "themes/soft-productivity/examples/README.md"
+    ]
+  }
+]

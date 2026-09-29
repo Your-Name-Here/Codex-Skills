@@ -1,0 +1,6 @@
+interface:
+  display_name: "Verification-First Planning"
+  short_description: "Plan features with verifiable acceptance criteria"
+  default_prompt: "Use $verification-first-planning to plan this feature with clear acceptance criteria and verification tasks."
+policy:
+  allow_implicit_invocation: true
