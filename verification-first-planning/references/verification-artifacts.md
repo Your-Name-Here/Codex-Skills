@@ -2,6 +2,8 @@
 
 Create the verifier before product implementation whenever practical. Use the project's existing test framework, layout, fixtures, and commands when they exist. Verification artifacts may include tests, fixtures, test data, test-only harnesses, and test-only configuration or scripts.
 
+Separate the planning-owned contract verifier from implementation-owned tests. Run the acceptance verifier for the product baseline and seal its executable artifacts with a SHA-256 manifest before handoff. See [Verifier ownership and integrity](verifier-integrity.md) for the manifest and checker.
+
 ## Keep the boundary clear
 
 - A test may invoke the product, arrange controlled inputs, and inspect observable results. It must not supply the missing product behavior itself.
