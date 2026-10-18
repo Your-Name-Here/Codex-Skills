@@ -22,6 +22,12 @@ Creates a concrete implementation handoff before product work begins. It defines
 
 The skill includes templates for feature specifications, verification matrices, baseline reports, and task lists, plus reference guides for requirements, tests, and planning.
 
+### Walmart Shopping
+
+**Skill name:** `walmart-shopping` · **Location:** [`walmart-shopping/`](walmart-shopping/)
+
+Search Walmart, compare products, manage a pickup cart, and prepare an order for review using the existing authenticated browser session. Invoke it with requests such as “Find whole milk and compare pickup prices by fluid ounce,” “Suggest cheaper equivalents for my cart,” or “Prepare my pickup order for review.” The skill stops before order submission until the user approves the complete order.
+
 ## Install
 
 Install either skill from this GitHub repository with the [`skills` CLI](https://www.skills.sh/docs/cli). `npx` runs it without a separate global installation:
@@ -34,10 +40,14 @@ npx skills add https://github.com/Your-Name-Here/Codex-Skills --skill frontend-s
 npx skills add https://github.com/Your-Name-Here/Codex-Skills --skill verification-first-planning
 ```
 
+```sh
+npx skills add https://github.com/Your-Name-Here/Codex-Skills --skill walmart-shopping
+```
+
 To install both in one command, pass both skill names:
 
 ```sh
-npx skills add https://github.com/Your-Name-Here/Codex-Skills --skill frontend-style-catalog --skill verification-first-planning
+npx skills add https://github.com/Your-Name-Here/Codex-Skills --skill frontend-style-catalog --skill verification-first-planning --skill walmart-shopping
 ```
 
 The CLI will ask where to install the skills if it cannot infer your agent or target. Use its `--help` option to see current targeting options:
@@ -62,6 +72,10 @@ npx skills update frontend-style-catalog
 
 ```sh
 npx skills update verification-first-planning
+```
+
+```sh
+npx skills update walmart-shopping
 ```
 
 The update command fetches the latest versions from their source repositories. New installs also receive the latest published version. See the [CLI documentation](https://www.skills.sh/docs/cli) for current options.
